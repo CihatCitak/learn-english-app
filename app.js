@@ -20,7 +20,13 @@
     .replace(/`([^`]+)`/g, '<code>$1</code>');
 
   // ---------------------------------------------------------------- tema
-  const applyTheme = (t) => { document.documentElement.setAttribute('data-theme', t); LS.set('theme', t); };
+  // Tema: data-theme + color-scheme (Android sanal tuş çubuğu ve kaydırma çubukları) + theme-color (durum çubuğu)
+  const applyTheme = (t) => {
+    document.documentElement.setAttribute('data-theme', t); LS.set('theme', t);
+    document.documentElement.style.colorScheme = t;
+    const bg = t === 'light' ? '#f4f5fa' : '#0f1117';
+    document.querySelectorAll('meta[name="theme-color"]').forEach((m) => m.setAttribute('content', bg));
+  };
   applyTheme(LS.get('theme', window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'));
   $('#themeBtn').onclick = () => applyTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
 
@@ -399,7 +405,7 @@
         5. Token'ı yukarıya yapıştır → Kaydet
       </div>
       <h2>Uygulama</h2>
-      <div class="card small">Sürüm: ${D.meta?.built ?? '—'} · Veri kaynağı: ${GH.token ? 'GitHub API' : 'yerel'}<br>Telefondaki kelime sorgu kayıtları ve token silinmez; sadece "Yerel kayıtları sıfırla" (Sor sekmesi) ve "Token'ı sil" ile.</div>`;
+      <div class="card small">Kabuk sürümü: <b id="shellVer">—</b> · Veri: ${D.meta?.built ?? '—'} · Veri kaynağı: ${GH.token ? 'GitHub API' : 'yerel'}<br>Telefondaki kelime sorgu kayıtları ve token silinmez; sadece "Yerel kayıtları sıfırla" (Sor sekmesi) ve "Token'ı sil" ile.</div>`;
     $('#sSave').onclick = async () => {
       LS.set('ghOwner', $('#sOwner').value.trim()); LS.set('ghRepo', $('#sRepo').value.trim()); LS.set('ghBranch', $('#sBranch').value.trim() || 'main'); LS.set('ghToken', $('#sToken').value.trim());
       $('#sMsg').textContent = 'bağlanıyor…';
@@ -407,6 +413,13 @@
       catch (e) { $('#sMsg').textContent = '❌ ' + e.message; }
     };
     $('#sClear').onclick = () => { LS.set('ghToken', ''); renderSettings(); };
+    // kabuk sürümünü service worker'dan sor
+    const ctrl = navigator.serviceWorker?.controller;
+    if (ctrl) {
+      const onMsg = (e) => { if (e.data?.type === 'version') { const el = $('#shellVer'); if (el) el.textContent = e.data.version; navigator.serviceWorker.removeEventListener('message', onMsg); } };
+      navigator.serviceWorker.addEventListener('message', onMsg);
+      ctrl.postMessage('version');
+    } else { const el = $('#shellVer'); if (el) el.textContent = 'sw yok'; }
   }
 
   // ---------------------------------------------------------------- sekmeler
