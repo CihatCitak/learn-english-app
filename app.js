@@ -119,7 +119,7 @@
     const q = LS.get('quizStats', {}); const todayOk = Object.values(q).filter((s) => s.last === today() && s.lastOk).length, todayAll = Object.values(q).filter((s) => s.last === today()).length;
 
     let html = `<div class="tiles">
-      <div class="tile accent"><div class="v">${m.words}</div><div class="l">öğrenilen kelime</div></div>
+      <div class="tile"><div class="v">${m.words}</div><div class="l">öğrenilen kelime</div></div>
       <div class="tile"><div class="v">${m.known}</div><div class="l">bilinen (elenen)</div></div>
       <div class="tile"><div class="v">${m.lessons}<span class="small">+${m.exams}</span></div><div class="l">ders + sınav günü</div></div>
       <div class="tile"><div class="v" style="color:var(--bad)">${mistOpen.length}</div><div class="l">açık hata · ${hot} 🔴</div></div>

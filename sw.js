@@ -1,5 +1,5 @@
 // Service worker: uygulama kabuğu cache-first, data/*.json network-first (çevrimdışı yedekli)
-const VERSION = 'v20260921003111';
+const VERSION = 'v20260921010020';
 const SHELL = ['./', './index.html', './style.css', './app.js', './manifest.json', './icons/icon-192.png', './icons/icon-512.png'];
 
 self.addEventListener('install', (e) => {
