@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4f46e5">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Learn English</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><span class="logo">EN</span><div><div class="t">Learn English</div><div class="s" id="builtAt">…</div></div></div>
+  <div class="top-actions">
+    <button class="icon-btn" id="settingsBtn" title="GitHub bağlantısı">⚙</button>
+    <button class="icon-btn" id="themeBtn" title="Tema">◐</button>
+    <button class="icon-btn" id="refreshBtn" title="Veriyi yenile">↻</button>
+  </div>
+</header>
+
+<main id="view" class="view"></main>
+
+<nav class="tabs">
+  <button data-tab="home" class="tab active"><span class="ico">▦</span>Özet</button>
+  <button data-tab="mistakes" class="tab"><span class="ico">✎</span>Hatalar</button>
+  <button data-tab="quiz" class="tab"><span class="ico">?</span>Sor</button>
+  <button data-tab="grammar" class="tab"><span class="ico">§</span>Gramer</button>
+  <button data-tab="words" class="tab"><span class="ico">A</span>Kelimeler</button>
+  <button data-tab="days" class="tab"><span class="ico">▤</span>Günler</button>
+</nav>
+
+<div id="modal" class="modal" hidden>
+  <div class="modal-card">
+    <div class="modal-head"><div id="modalTitle" class="modal-title"></div><button class="icon-btn" id="modalClose">✕</button></div>
+    <div id="modalBody" class="modal-body"></div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

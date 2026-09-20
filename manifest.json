@@ -1,0 +1,16 @@
+{
+  "name": "Learn English — Cihat",
+  "short_name": "Learn EN",
+  "description": "Kişisel İngilizce tekrar ve ilerleme takibi",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f1117",
+  "theme_color": "#4f46e5",
+  "lang": "tr",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
