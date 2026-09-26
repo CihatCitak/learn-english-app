@@ -132,3 +132,12 @@ table.forms td { font-size: 13px; }
 .tab { font-size: 10.5px; }
 
 label.small { display: block; margin-top: 10px; margin-bottom: 4px; }
+
+/* gün 40 eklemeleri: kısaltma, tekrar modu, boşluk/TR modları */
+.clamp2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.tile.tap { cursor: pointer; }
+.tile.tap:active { transform: scale(.985); }
+.quiz-word.small-word { font-size: 22px; }
+.quiz-sentence { font-size: 19px; line-height: 1.5; text-align: center; margin: 16px 0 6px; }
+.drill-wrong { font-size: 18px; line-height: 1.5; text-align: center; margin: 16px 0 6px; color: var(--bad); }
+.quiz-answer .r { color: var(--ok); font-weight: 600; }
