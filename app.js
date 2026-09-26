@@ -429,5 +429,12 @@
   document.querySelectorAll('.tab').forEach((b) => (b.onclick = () => { tab = b.dataset.tab; LS.set('tab', tab); window.scrollTo(0, 0); render(); }));
 
   load().then(render).catch((e) => { D.meta = D.meta || {}; view.innerHTML = `<div class="empty">Veri yüklenemedi: ${esc(e.message)}<br><span class="small">GitHub token girmen gerekiyor.</span></div>`; setTimeout(() => { tab = 'settings'; renderSettings(); }, 800); });
-  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').then((reg) => {
+      // her açılışta ve uygulama öne her geldiğinde yeni kabuk var mı diye bak (PWA'da tarayıcı bunu 24 saatte bir yapar)
+      const check = () => reg.update().catch(() => {});
+      check();
+      document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') check(); });
+    }).catch(() => {});
+  }
 })();
